@@ -5,12 +5,13 @@ import pygame, random, time
 
 
 
-# class Monster(object):
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-#         self.speed_x = 5
-#         self.speed_y = 5
+class Monster(object):
+    def __init__(self, x, y):
+        self.img = pygame.image.load('images/monster.png').convert_alpha()
+        self.x = x
+        self.y = y
+        self.speed_x = 2
+        self.speed_y = 2
 #
 #
 #     # def update()
@@ -43,11 +44,12 @@ def main():
     background_image = pygame.image.load('images/background.png').convert_alpha()
     #sprite characters
     hero = pygame.image.load('images/hero.png').convert_alpha()
-    monster = pygame.image.load('images/monster.png').convert_alpha()
-    monster_x = 50
-    monster_y = 50
-    monster_speed_x = 5
-    monster_speed_y = 0
+    # monsterimg = pygame.image.load('images/monster.png').convert_alpha()
+    # monster_x = 50
+    # monster_y = 50
+    # monster_speed_x = 5
+    # monster_speed_y = 5
+    monster = Monster(30, 30)
     goblin = pygame.image.load('images/goblin.png').convert_alpha()
     # game loop
     stop_game = False
@@ -67,22 +69,22 @@ def main():
         ######################################
         #moves the monster right and off screen
 
-        monster_x += monster_speed_x
-        monster_y += monster_speed_y
-        if monster_x > width:
-            monster_speed_x = -5
-        if monster_y > width:
-            monster_speed_y = -5
-        if monster_x - 30 < 0:
-            monster_speed_x = 5
-        if monster_y - 30 < 0:
-            monster_speed_y = 5
+        monster.x += monster.speed_x
+        monster.y += monster.speed_y
+        if monster.x + 60 > width:
+            monster.speed_x = -5
+        if monster.y + 60 > height:
+            monster.speed_y = -5
+        if monster.x - 30 < 0:
+            monster.speed_x = 3
+        if monster.y - 30 < 0:
+            monster.speed_y = 3
 
         time_to_dir_change = time.time() + 2
         now = time.time()
         if now <= time_to_dir_change:
-            monster_x += 1
-            monster_y += 1
+            monster.x += 1
+            monster.y += 1
             # monster_speed_x = 5
             # monster_speed_y = 5
             time_to_dir_change = time.time() + 2
@@ -98,7 +100,7 @@ def main():
 
         #renders sprites
         screen.blit(hero, (250, 200))
-        screen.blit(monster, (monster_x, monster_y)),
+        screen.blit(monster.img, (monster.x, monster.y)),
         screen.blit(goblin, (350, 350))
 
         # update the canvas display with the currently drawn frame

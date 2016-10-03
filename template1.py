@@ -46,6 +46,8 @@ def main():
     monster = pygame.image.load('images/monster.png').convert_alpha()
     monster_x = 50
     monster_y = 50
+    monster_speed_x = 5
+    monster_speed_y = 0
     goblin = pygame.image.load('images/goblin.png').convert_alpha()
     # game loop
     stop_game = False
@@ -64,11 +66,26 @@ def main():
         # PUT LOGIC TO UPDATE GAME STATE HERE #
         ######################################
         #moves the monster right and off screen
-        # while time < 120:
-        monster_x += random.randint()
-        monster_y += random.randint()
+
+        monster_x += monster_speed_x
+        monster_y += monster_speed_y
         if monster_x > width:
-            monster_x = 0
+            monster_speed_x = -5
+        if monster_y > width:
+            monster_speed_y = -5
+        if monster_x - 30 < 0:
+            monster_speed_x = 5
+        if monster_y - 30 < 0:
+            monster_speed_y = 5
+
+        time_to_dir_change = time.time() + 2
+        now = time.time()
+        if now <= time_to_dir_change:
+            monster_x += 1
+            monster_y += 1
+            # monster_speed_x = 5
+            # monster_speed_y = 5
+            time_to_dir_change = time.time() + 2
 
         # fill background color
         screen.fill(blue_color)

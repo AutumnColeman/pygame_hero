@@ -92,11 +92,11 @@ class Hero(object):
                 self.speed_x = 4
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
-                self.speed_y -= 0
+                self.speed_y = 0
             elif event.key == pygame.K_DOWN:
                 self.speed_y = 0
             elif event.key == pygame.K_LEFT:
-                self.speed_x -= 0
+                self.speed_x = 0
             elif event.key == pygame.K_RIGHT:
                 self.speed_x = 0
 
